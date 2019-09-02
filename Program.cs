@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
@@ -20,8 +21,13 @@ namespace MyPortfolioWebApp
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseStartup<Startup>();
+                    webBuilder.UseStartup<Startup>();                    
                     webBuilder.UseUrls("http://127.0.0.1:5000");
+                    webBuilder.ConfigureAppConfiguration((hostingContext, config) =>
+                    {
+                        config.SetBasePath(Directory.GetCurrentDirectory());
+                        config.AddJsonFile("emailservicesettings.json", optional:false,reloadOnChange:false);
+                    });
                 });
     }
 }

@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 
 namespace MyPortfolioWebApp
 {
@@ -15,7 +16,12 @@ namespace MyPortfolioWebApp
     {
        
         public void ConfigureServices(IServiceCollection services)
-        {            
+        {
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+            });
+
             services.AddMvc(options =>
             {
                 options.EnableEndpointRouting = false;                
@@ -28,16 +34,17 @@ namespace MyPortfolioWebApp
             {
                 app.UseDeveloperExceptionPage();
             }
-           
-            app.UseStaticFiles(new StaticFileOptions()
-            {
-                //OnPrepareResponse = context =>
-                //{
-                //    context.Context.Response.Headers.Add("Cache-Control", "no-cache, no-store");
-                //    context.Context.Response.Headers.Add("Expires", "-1");
-                //}
-            });        
+
+            app.UseStaticFiles();
+
+            app.UseSwagger();
+
             
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            });
+
             app.UseMvc(configureRouters =>
             {
                 configureRouters.MapRoute("default", "{controller=Home}/{action=About}");

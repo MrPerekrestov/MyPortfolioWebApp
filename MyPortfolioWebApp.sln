@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29209.152
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyPortfolioWebApp", "MyPortfolioWebApp.csproj", "{EF780647-8C7F-497E-843C-6086089D3CEC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyPortfolioWebApp.Tests", "..\MyPortfolioWebApp.Tests\MyPortfolioWebApp.Tests.csproj", "{B31C03B6-E72F-403D-86A9-2DECC1383644}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyPortfolioWebApp.Tests", "..\MyPortfolioWebApp.Tests\MyPortfolioWebApp.Tests.csproj", "{B31C03B6-E72F-403D-86A9-2DECC1383644}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

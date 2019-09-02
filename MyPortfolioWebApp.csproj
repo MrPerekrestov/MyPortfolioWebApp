@@ -3,5 +3,10 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
+  
+   <ItemGroup>
+    <PackageReference Include="MailKit" Version="2.3.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.0.0-rc2" />
+  </ItemGroup>
  
 </Project>
