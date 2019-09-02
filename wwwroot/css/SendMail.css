@@ -1,0 +1,89 @@
+:root {
+  --send-mail-button-text-color-hover: #fc913a;
+}
+.send-mail-container-outer {
+  display: none;
+  background: #fffef1;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30rem;
+  height: 30rem;
+  border-radius: 0.3rem;
+  box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.75);
+  opacity: 0;
+  font-size: 1.1rem;
+  z-index: 2;
+}
+
+.send-email-button {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  padding: 0.4rem;
+  padding-right: 1rem;
+  padding-left: 1rem;
+  margin: 0.4rem;
+  border-style: solid;
+  border-radius: 0.2rem;
+  border-width: thin;
+  text-align: center;
+}
+.send-email-button:hover {
+  cursor: pointer;
+  color: var(--send-mail-button-text-color-hover);
+}
+
+.send-mail-container-inner {
+  font-family: "Josefin Sans", sans-serif;
+  color: gray;
+  margin: 1rem;
+  display: grid;
+  grid-template-columns: auto;
+}
+.send-mail-container-inner textarea {
+  resize: none;
+  height: 17rem;
+  padding: 0.2rem;
+  margin-bottom: 0.5rem;
+  font-family: inherit;
+  font-size: inherit;
+}
+.send-mail-container-inner input {
+  width: 100%;
+  margin-bottom: 0.5rem;
+  padding: 0.2rem;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+.shade {
+  content: "";
+  display: none;
+  position: fixed;
+  background: rgba(100, 100, 100, 0.5);
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+}
+.send-mail-button-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.send-mail-text-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+.send-mail-validaton {
+  color: lightcoral;
+}

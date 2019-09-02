@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="~/css/Layout.css" />
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap"
+          rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Arvo&display=swap"
+          rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/SendMail.css" />
+    <link rel="stylesheet" href="~/css/About.css" />
+    <script src="~/js/anime.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <nav>
+        <div class="nav-bar-container-outer">
+            <div class="nav-bar-container-inner">
+                <div></div>
+                <div class="nav-bar-item">My projects</div>
+                <div class="nav-bar-item">About me</div>
+                <div class="send-message-container">
+                    <img id="send-email-image"
+                         class="send-message-icon"
+                         src="~/icons/envelope-with-writing-tool.svg"
+                         alt="send email image"
+                         title="Write me an e-mail :)" />
+                </div>
+            </div>
+        </div>        
+    </nav>
+    <div class="content-container">
+        @RenderBody()
+    </div>
+    <div class="footer-container">
+        <div class="footer-item">
+            ©Roman Perekrestov 2019
+        </div>
+        <a href="https://www.facebook.com/profile.php?id=100005632242736"
+           target="_blank"
+           class="footer-item">
+            <img src="~/icons/icons8-facebook-100.png"
+                 width="32"
+                 height="32"
+                 alt="" />
+        </a>
+        <a href="https://www.linkedin.com/in/roman-perekrestov-177123117/"
+           target="_blank"
+           class="footer-item">
+            <img src="~/icons/icons8-linkedin-circled-100.png"
+                 width="32"
+                 height="32"
+                 alt="" />
+        </a>
+        <a href="https://www.youtube.com/channel/UCB5RoKNNKigF4L83b67qpLw?view_as=subscriber"
+           target="_blank"
+           class="footer-item">
+            <img src="~/icons/iconfinder_youtube_circle_black_107154.png"
+                 width="32"
+                 height="32"
+                 alt="" />
+        </a>
+    </div>
+    <div class="send-mail-container-outer" id="send-mail-container-outer">
+        <div class="send-mail-container-inner">
+            <div class="send-mail-text-wrapper">
+                <div>Your e-mail</div>
+                <div class="send-mail-validaton"
+                     id="send-mail-email-validation"></div>
+            </div>
+            <input type="text" id="send-mail-your-email" spellcheck="false" />
+            <div class="send-mail-text-wrapper">
+                <div>Your name</div>
+                <div class="send-mail-validaton"
+                     id="send-mail-subject-validation"></div>
+            </div>
+            <input type="text" id="send-mail-subject" spellcheck="false" />
+            <div class="send-mail-text-wrapper">
+                <div>Message</div>
+                <div class="send-mail-validaton" id="send-mail-text-validation"></div>
+            </div>
+            <textarea spellcheck="false" id="send-mail-text"></textarea>
+            <div class="send-mail-button-container">
+                <div class="send-email-button" id="email-cancel-button">Cancel</div>
+                <div class="send-email-button" id="email-send-button">Send</div>
+            </div>
+        </div>
+    </div>
+    <div id="progress-image">
+        <img src="~/icons/loading-animation.gif" alt="" />
+    </div>
+    <div id="pop-up">
+        <div style="padding:1rem;">
+            <div id="pop-up-message"></div>
+        </div>
+    </div>
+    <div class="shade" id="shade"></div>
+    <script src="~/js/SendMail.js"></script>
+    <script src="~/js/Layout.js"></script>
+</body>
+</html>
