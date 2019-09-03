@@ -23,4 +23,6 @@ async function PopUpMessage(message, animationDuration, showTime) {
   await new Promise(resolve => setTimeout(resolve, animationDuration));
   popUpContainer.style.display = "none";
 }
-window.addEventListener("load", () => {});
+window.addEventListener("load", () => {
+    document.body.style.display = "flex";
+}, false);
