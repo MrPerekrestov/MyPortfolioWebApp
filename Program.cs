@@ -28,6 +28,12 @@ namespace MyPortfolioWebApp
                         config.SetBasePath(Directory.GetCurrentDirectory());
                         config.AddJsonFile("emailservicesettings.json", optional:false,reloadOnChange:false);
                     });
+                    webBuilder.ConfigureLogging((hostingContext, logging) =>
+                    {
+                        logging.AddConfiguration(hostingContext.Configuration.GetSection("Logging"));
+                        logging.AddConsole();
+                        logging.AddFilter("Microsoft", LogLevel.Error);
+                    });
                 });
     }
 }

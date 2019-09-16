@@ -1,5 +1,9 @@
-﻿@{
-    ViewBag.Title = "About";
+﻿@using MyPortfolioWebApp.Extensions;
+@{
+    ViewBag.Title = "Perekrestov's corner";  
+}
+@if (!Context.Request.IsAjaxRequest())
+{
     Layout = "~/Views/_Layout.cshtml";
 }
 <div class="content-continer-center">

@@ -19,6 +19,7 @@ window.addEventListener("load", () => {
             sendEmailXhr.open("POST", "/api/email/send", true);
             sendEmailXhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
             sendEmailXhr.setRequestHeader('Content-Type', 'application/json');
+            sendEmailXhr.responseType = 'json';            
             
             sendEmailXhr.onload =  function(){
                 resolve(sendEmailXhr.response);
@@ -64,7 +65,7 @@ window.addEventListener("load", () => {
         }
     });
 
-    const closeEmail = async () => {
+    async function closeEmail(){
         if (sendEmailIsOpened) {
             anime({
                 targets: ".shade",
@@ -93,7 +94,7 @@ window.addEventListener("load", () => {
 
     document
         .getElementById("email-send-button")
-        .addEventListener("click", async () => {
+        .addEventListener("click", async function() {
             let emailValidationRegExp = /^[\w\.=-]+@[\w\.-]+\.[\w]{2,3}$/;
             let email = sendMailYourMail.value;
             let inputIsValid = true;
@@ -121,14 +122,15 @@ window.addEventListener("load", () => {
             if (!inputIsValid) return;
 
             let progressImage = document.getElementById("progress-image");
-            progressImage.style.display = "block";
-           // await new Promise(resolve => setTimeout(resolve, 2000));
-            await sendEmail();
-            progressImage.style.display = "none";
 
+            progressImage.style.display = "block";           
+            let emailSendingResult  =  await sendEmail();
+            progressImage.style.display = "none";
+            
             await closeEmail();
+           
             await PopUpMessage(
-                "Your e-mail was successfully sent. I will answer as soon as posible 👍",
+                emailSendingResult.message,
                 500,
                 5000
             );

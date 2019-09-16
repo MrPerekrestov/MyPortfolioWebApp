@@ -9,8 +9,6 @@ using MimeKit.Text;
 using MyPortfolioWebApp.Models.Email;
 using MyPortfolioWebApp.Services.Email;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace MyPortfolioWebApp.Controllers
 {
     [Route("api/[controller]")]
@@ -43,11 +41,12 @@ namespace MyPortfolioWebApp.Controllers
             {
                 if (!ModelState.IsValid)
                 {
-                    var modelErrors = ModelState.Values.SelectMany(v => v.Errors)
-                                                       .Select(er => er.ErrorMessage)
-                                                       .Aggregate(
-                                                            (aggregatedValue, nextValue) =>
-                                                                    aggregatedValue += " "+nextValue);
+                    var modelErrors = ModelState
+                                        .Values
+                                        .SelectMany(v => v.Errors)
+                                        .Select(er => er.ErrorMessage)
+                                        .Aggregate((aggregatedValue, nextValue) =>
+                                                   aggregatedValue += " "+nextValue);
                     return StatusCode(
                         StatusCodes.Status500InternalServerError,
                         new { success = false, message = modelErrors });

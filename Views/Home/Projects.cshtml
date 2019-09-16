@@ -1,0 +1,38 @@
+﻿@using MyPortfolioWebApp.DatabaseManager.DatabaseService.ProjectViewerReturnTypes;
+@using MyPortfolioWebApp.Extensions;
+@if (!Context.Request.IsAjaxRequest())
+{
+    Layout = "~/Views/_Layout.cshtml";
+}
+@model IEnumerable<ProjectInfo>
+@{
+    ViewBag.Title = "Perekrestov's corner";
+    int? year = null;
+}
+<div class="projects-container">
+    @foreach (var projectInfo in Model)
+    {
+        if ((year == null) || (projectInfo.Created.Year < year))
+        {
+            year = projectInfo.Created.Year;
+            <div class="project-item-container-year project-item-container">
+                @year
+            </div>
+        }
+        <div class="project-item-container">
+            <div class="project-item-header">
+                    <h2>@projectInfo.Name</h2> 
+                <div class="project-item-published">
+                    released: @projectInfo.Created.ToString("MM/yyyy")
+                </div>
+            </div>
+            <div class="project-item-body">
+                @Html.Raw(projectInfo.Description)
+            </div>
+            <div class="link-button" project-id="@projectInfo.Id">Details</div>
+        </div>
+    }
+</div>
+
+
+

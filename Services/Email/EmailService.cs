@@ -45,7 +45,7 @@ namespace MyPortfolioWebApp.Services.Email
                                     _emailServiceOptions.AuthenticationPassword);
                 client.Send(message);
                 client.Disconnect(true);
-                return (true, "E-mail was successfully sent");
+                return (true, "Your e-mail was successfully sent. I will answer as soon as posible 👍");
             }
             catch (Exception exception)
             {

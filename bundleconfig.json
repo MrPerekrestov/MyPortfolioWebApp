@@ -1,0 +1,25 @@
+[
+  {
+    "outputFileName": "wwwroot/css/portfolio.min.css",
+    "inputFiles": [
+      "wwwroot/css/About.css",
+      "wwwroot/css/Layout.css",
+      "wwwroot/css/Project.css",
+      "wwwroot/css/Projects.css",
+      "wwwroot/css/SendMail.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/portfolio.min.js",
+    "inputFiles": [
+      "wwwroot/js/ProjectsLinkClick.js",
+      "wwwroot/js/anime.min.js",
+      "wwwroot/js/Layout.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  }
+]

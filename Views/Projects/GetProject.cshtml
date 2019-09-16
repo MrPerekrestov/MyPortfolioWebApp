@@ -1,0 +1,9 @@
+﻿@model string;
+@using Microsoft.AspNetCore.Hosting;
+
+@inject IWebHostEnvironment env;
+@{
+    ViewBag.Title = "Perekrestov's corner";
+    Layout = "~/Views/_Layout.cshtml";   
+}
+@Html.Raw(Model)
