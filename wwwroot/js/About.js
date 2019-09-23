@@ -6,6 +6,7 @@
             getAboutXhr.open("GET", "/about", true);
             getAboutXhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");           
             getAboutXhr.onload = function () {
+                ajaxFinished = true;                
                 resolve(getAboutXhr.response);
             };
             getAboutXhr.onerror = function () {
@@ -17,9 +18,13 @@
    
     document
         .getElementById("about-button")
-        .addEventListener("click", async function() {
+        .addEventListener("click", async function () {
+            ajaxFinished = false;
             let result = await Promise.all([GetAboutHtml(), FadeInAnimation(animationDuration)]);
+            let progressImage = document.getElementById("progress-image");
+            progressImage.style.display = "none";            
             contentContainer.innerHTML = result[0];
+            window.scrollTo(0, 0);            
             anime({
                 targets: ".content-container",
                 opacity: [0, 1],              

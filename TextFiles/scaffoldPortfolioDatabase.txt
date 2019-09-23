@@ -1,0 +1,1 @@
+Scaffold-DbContext "persistsecurityinfo=False;server=localhost;user id=root; password=123321q1; port=3306; database=portfolio" MySql.Data.EntityFrameworkCore -o DbContexts/PortfolioDbContext -f

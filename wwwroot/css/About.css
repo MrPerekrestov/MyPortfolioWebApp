@@ -1,21 +1,22 @@
-:root {
-    /* --paragraph-text-color: rgb(95, 93, 93); */
-    --paragraph-text-color: black;
-    /*  --small-header-color: #fc913a; */
-    --small-header-color: black;
-    /*--text-font-family: "Arvo", serif;*/
+:root { 
+    --paragraph-text-color: black;   
+    --small-header-color: black;   
     --text-font-family: "Montserrat", serif;
 }
 .content-continer-center {
-  width: 100%;
-  min-width: 65rem;
+  width: 100%;  
   margin: 0 auto;
 }
 .content-container-two-columns {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
+    margin: 0 auto;
+    margin-top: 1rem;
+    margin-bottom:2rem;
+    max-width: 75rem;
+    display: grid;
+    justify-content: center;
+    grid-template-columns: auto auto;
 }
+
 .content-container-two-columns p {
   text-indent: 2rem;
   font-size: 1rem;
@@ -32,20 +33,57 @@
 .content-container-two-columns h4 {
   font-family: var(--text-font-family);
 }
+
 .content-container-item {
-  padding: 0.5rem;
-  margin: 0.5rem;
-  width: 25rem;
-  min-width: 30rem;
+    padding: 0.5rem;
+    margin: 0.5rem;   
+    min-width: 35rem;
+    display: flex;
+    box-sizing:border-box;
+    flex-direction: column;
+    justify-content: center;
 }
     .content-container-item div {
-        box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.7);
+        box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.7);       
     }
-.content-container img {
+.content-container-item-image {
+    width: 442px;
+    display: block;
+    margin: 0.1rem auto;
     padding: 0;
-    margin: 1rem;
     box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.7);
 }
+
 .about-text {
   text-align: justify;
+}
+@media (max-width: 1040px) {
+    .content-container-two-columns {
+        grid-template-columns: auto;
+    }   
+        .content-container-item {
+        width: 95%;
+        margin:0.5rem auto;
+    }
+    
+}
+@media only screen and (max-device-aspect-ratio: 9/13) {
+    .content-container-two-columns {
+        grid-template-columns: auto;
+    }
+
+    .content-container-item {
+        min-width: 95%;        
+        margin: 0.5rem auto;
+    }
+
+    .content-container-item-image {
+        width: 100%;
+        margin: 0.1rem auto;
+    }
+
+    .content-container-two-columns p {
+        font-size:1.2rem;
+        line-height:2rem;
+    }
 }

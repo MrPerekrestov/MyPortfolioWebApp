@@ -22,12 +22,12 @@ namespace MyPortfolioWebApp
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();                    
-                    webBuilder.UseUrls("http://127.0.0.1:5000");
+                    webBuilder.UseUrls("http://*:5000");
                     webBuilder.ConfigureAppConfiguration((hostingContext, config) =>
                     {
                         config.SetBasePath(Directory.GetCurrentDirectory());
                         config.AddJsonFile("emailservicesettings.json", optional:false,reloadOnChange:false);
-                    });
+                    });                    
                     webBuilder.ConfigureLogging((hostingContext, logging) =>
                     {
                         logging.AddConfiguration(hostingContext.Configuration.GetSection("Logging"));

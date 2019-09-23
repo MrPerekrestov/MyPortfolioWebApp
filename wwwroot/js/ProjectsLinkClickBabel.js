@@ -4,6 +4,7 @@
         getProjectXhr.open("GET", `/projects/${projectId}`, true);
         getProjectXhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
         getProjectXhr.onload = function () {
+            ajaxFinished = true; 
             resolve(getProjectXhr.response);
         };
         getProjectXhr.onerror = function () {
@@ -26,7 +27,11 @@ window.addEventListener("load", function () {
         var _loop = function _loop() {
             var linkButton = _step.value;
             linkButton.addEventListener("click", async function () {
+                ajaxFinished = false; 
                 var result = await Promise.all([projectsLinkClick(linkButton.getAttribute("project-id")), FadeInAnimation(animationDuration)]);
+                let progressImage = document.getElementById("progress-image");
+                progressImage.style.display = "none";
+                window.scrollTo(0, 0);
                 contentContainer.innerHTML = result[0];
                 anime({
                     targets: ".content-container",

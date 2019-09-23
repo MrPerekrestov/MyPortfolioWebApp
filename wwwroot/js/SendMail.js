@@ -12,7 +12,7 @@ window.addEventListener("load", () => {
     );
     let textValidation = document.getElementById("send-mail-text-validation");
     let sendEmailIsOpened = false;
-
+    shade.addEventListener("click", closeEmail);
     async function sendEmail() {
         return new Promise(resolve => {
             let sendEmailXhr = new XMLHttpRequest();

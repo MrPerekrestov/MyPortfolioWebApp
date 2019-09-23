@@ -10,20 +10,23 @@ using MyPortfolioWebApp.DatabaseManager.DatabaseService;
 using Google.Protobuf.WellKnownTypes;
 using MyPortfolioWebApp.Services.OperationsWithFiles;
 using MyPortfolioWebApp.Extensions;
+using MyPortfolioWebApp.Services.ProjectsRepository;
 
 namespace MyPortfolioWebApp.Controllers
 {
     public class ProjectsController : Controller
-    {
-        private readonly IConfiguration _configuration;
-        private readonly IWebHostEnvironment _env;
+    {           
         private readonly IProjectFilesResolver _filesResolver;
+        private readonly IProjectsRepository _projectsRepository;
 
-        public ProjectsController(IConfiguration configuration, IWebHostEnvironment env, IProjectFilesResolver filesResolver)
-        {
-            _configuration = configuration;
-            _env = env;
+        public ProjectsController(            
+            IWebHostEnvironment env,
+            IProjectFilesResolver filesResolver,
+            IProjectsRepository projectsRepository)
+        {       
+           
             _filesResolver = filesResolver;
+            _projectsRepository = projectsRepository;
             var webContentPath = env.WebRootPath;
             var fullProjectsPath = Path.Combine(webContentPath, "Projects");
 
@@ -37,21 +40,19 @@ namespace MyPortfolioWebApp.Controllers
         [HttpGet]
         [Route("projects/{id}")]
         public IActionResult GetProject(int id)
-        {           
-            var connectionString = _configuration.GetConnectionString("portfolio");
-            var projectExist = ProjectViewer.CheckIfProjectExists(id, connectionString);
-            if (!ProjectViewer.CheckIfProjectExists(id, connectionString))
+        {         
+            if (!_projectsRepository.CheckIfProjectExists(id))
             {
                 return RedirectToAction("About","Home");
             }
 
-            var projectInfo = ProjectViewer.GetProjectInfo(id, connectionString);          
+            var projectInfo = _projectsRepository.GetProjectInfo(id);          
             _filesResolver.Resolve(projectInfo); 
             if (HttpContext.Request.IsAjaxRequest())
             {
-                return Ok(ProjectViewer.GetHtml(id, connectionString));
+                return Ok(_projectsRepository.GetHtml(id));
             }
-            return View("GetProject",ProjectViewer.GetHtml(id,connectionString));
+            return View("GetProject",_projectsRepository.GetHtml(id));
         }
     }
 }

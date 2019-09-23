@@ -9,6 +9,7 @@
     <title>@ViewBag.Title</title>
 </head>
 <body>
+    <div class="background"></div>
     <nav>
         <div class="nav-bar-container-outer">
             <div class="nav-bar-container-inner">
@@ -18,14 +19,14 @@
                 <div class="send-message-container">
                     <img id="send-email-image"
                          class="send-message-icon"
-                         src="~/icons/envelope-with-writing-tool.svg"
+                         width="48"                         
                          alt="send email image"
                          title="Write me an e-mail :)" />
                 </div>
             </div>
         </div>
     </nav>
-    <div class="content-container">
+    <div class="content-container" >
         @RenderBody()
     </div>
     <div class="footer-container">
@@ -90,7 +91,7 @@
             <div id="pop-up-message"></div>
         </div>
     </div>
-    <div class="shade" id="shade"></div>   
+    <div class="shade" id="shade"></div>
     <script src="~/js/portfolio.min.js"></script>
 </body>
 </html>

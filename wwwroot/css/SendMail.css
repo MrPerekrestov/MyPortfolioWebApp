@@ -1,20 +1,22 @@
 :root {
   --send-mail-button-text-color-hover: #fc913a;
 }
+
 .send-mail-container-outer {
-  display: none;
-  background: #fffef1;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 30rem;
-  height: 30rem;
-  border-radius: 0.3rem;
-  box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.75);
-  opacity: 0;
-  font-size: 1.1rem;
-  z-index: 2;
+    display: none;
+    background: #fffef1;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);   
+    max-width: 30rem;
+    width:30rem;
+    max-height: 30rem;
+    border-radius: 0.3rem;
+    box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.75);
+    opacity: 0;
+    font-size: 1.1rem;
+    z-index: 2;
 }
 
 .send-email-button {
@@ -47,7 +49,7 @@
 }
 .send-mail-container-inner textarea {
   resize: none;
-  height: 17rem;
+  height:17rem;
   padding: 0.2rem;
   margin-bottom: 0.5rem;
   font-family: inherit;
@@ -73,7 +75,7 @@
   left: 0;
   z-index: 1;
   width: 100%;
-  height: 100%;
+  height: 120%;
 }
 .send-mail-button-container {
   display: flex;
@@ -86,4 +88,17 @@
 }
 .send-mail-validaton {
   color: lightcoral;
+}
+@media only screen and (max-device-aspect-ratio: 9/13) {
+    .send-mail-container-outer {
+        width:90%;        
+    }    
+}
+@media only screen and (max-height:500px)
+{
+    .send-mail-container-outer {
+        position: absolute;
+        top:5rem;
+        transform: translate(-50%, 0%);      
+    }  
 }

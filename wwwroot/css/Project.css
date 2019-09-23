@@ -1,47 +1,123 @@
 ﻿.project-container {
-    width: 65rem;
+    max-width: 65rem;
     border-radius: 0.4rem;
     margin: 1rem auto;
-    /*background-color: rgba(252, 252, 231, 0.5);*/
     padding: 1rem;
-    padding-top: 0.1rem;
-    /*box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.7);*/
+    padding-top: 1rem;
     color: rgb(87, 83, 83);
+    box-sizing:border-box;
 }
 
-    .project-container img,
-    .project-container div {
-        width: 100%;
-        margin: 0 auto;
-        display: block;
-        margin-bottom: 1rem;
-        border-radius: 0.4rem;
-    }
+.project-container-image {
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    background-color: rgba(252, 252, 231, 1);
+    box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.7);
+    margin-bottom: 1rem;
+    border-radius: 0.4rem;
+}
 
-    .project-container p {
-        color: black;
-        text-indent: 2rem;
-        font-size: 1.1rem;
-        padding: 1rem;
-        border-radius: 0.4rem;
-        background-color: rgb(252, 252, 231);
-        font-family: Arial, Helvetica, sans-serif;
-        text-align: justify;
+    .project-container-image img {
+        width: 95%;
         box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.7);
-        font-family: "Montserrat", serif;
+        margin: 0 auto;
+        justify-self: center;
+        margin-bottom: 1rem;
+        margin-top: 1.5rem;
     }
 
-    .project-container h1,
-    .project-container h2,
-    .project-container h3,
-    .project-container h4 {
-        color: rgb(37, 37, 37);
-        font-style: italic;
-    }
+.project-container ul {
+    margin-right: 1rem;
+}
+.project-container li {
+    margin-bottom: 1rem;
+}
 
 .project-image-caption {
-    color: rgb(37, 37, 37);
-    font-size: 1.2rem;
-    font-family: Arial, Helvetica, sans-serif;
-    font-style: italic;
+    text-align: center;
+    color: rgb(87, 83, 83);
+    font-size: 1.1rem;
+    font-family: "Montserrat", sans-serif;   
+    font-weight:500;
+    margin-bottom: 1rem;
 }
+
+
+.project-text {
+    color: rgb(87, 83, 83);
+    text-indent: 2rem;
+    font-size: 1.1rem;
+    padding: 0.5rem;
+    border-radius: 0.4rem;
+    background-color: rgb(252, 252, 231);
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: justify;
+    box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.7);
+    line-height: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.project-container p {
+    color: rgb(87, 83, 83);
+    text-indent: 2rem;
+    font-size: 1.2rem;
+    font-family: "Montserrat", sans-serif;
+    text-align: justify;
+    line-height: 2rem;
+    margin: 1rem;
+}
+
+.project-container h3 {
+    color: rgb(87, 83, 83);
+    margin: 0.5rem;
+    margin-top: 1rem;
+    margin-bottom: 0;
+    text-indent: 2rem;
+    font-style: normal;
+    font-family: "Josefin Sans", sans-serif;
+    font-size: 1.4rem;
+}
+
+.project-container li {
+    font-family: "Montserrat", sans-serif;
+    font-size: 1.2rem;
+    line-height: 2rem;
+    font-weight: 500;
+}
+
+.project-link-container {
+    display: grid;
+    margin-left:3rem;
+    margin-top:0.5rem;
+    margin-bottom:1rem;
+    justify-content: left;
+    grid-template-columns: auto;
+}
+
+    .project-link-container h3 {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin: 0;
+        margin-right: 0.5rem;
+    }
+
+    .project-link-container p {
+        margin: 0.5rem;
+        white-space: nowrap;
+    }
+
+    .project-link-container a {
+        font-family: "Montserrat", sans-serif;
+        font-weight: 500;
+        display: flex;
+        margin: 0.5rem;
+        flex-direction: column;
+        justify-content: center;
+        font-size: 1.3rem;
+        text-indent: 0;
+    }

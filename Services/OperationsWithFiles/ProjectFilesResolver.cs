@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using MyPortfolioWebApp.DatabaseManager.DatabaseService;
 using MyPortfolioWebApp.DatabaseManager.DatabaseService.ProjectViewerReturnTypes;
+using MyPortfolioWebApp.Services.ProjectsRepository;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -12,22 +13,23 @@ namespace MyPortfolioWebApp.Services.OperationsWithFiles
 {
     public class ProjectFilesResolver : IProjectFilesResolver
     {
-        private readonly IWebHostEnvironment _env;
-        private readonly IConfiguration _configuration;
+        private readonly IWebHostEnvironment _env;   
+        private readonly IProjectsRepository _projectsRepository;
 
-        public ProjectFilesResolver(IWebHostEnvironment env, IConfiguration configuration)
+        public ProjectFilesResolver(
+            IWebHostEnvironment env,        
+            IProjectsRepository projectsRepository)
         {
-            _env = env;
-            _configuration = configuration;
+            _env = env;          
+            _projectsRepository = projectsRepository;
         }
         public void Resolve(ProjectInfo projectInfo)
         {
-            var id = projectInfo.Id;
-            var connectionString = _configuration.GetConnectionString("portfolio");
+            var id = projectInfo.Id;           
             var projectDirectory = Path.Combine(_env.WebRootPath, "Projects", id.ToString());
             var imagesDirectoryPath = Path.Combine(projectDirectory, "images");
             var projectImagesChangedPath = Path.Combine(projectDirectory, "images.tmstmp");
-            var images = ProjectViewer.GetImagesInfo(id, connectionString);
+            var images = _projectsRepository.GetImagesInfo(id);
 
             //if project files directory does not exist => create all files from scratch
             if (!Directory.Exists(projectDirectory))
@@ -38,10 +40,9 @@ namespace MyPortfolioWebApp.Services.OperationsWithFiles
                 foreach (var image in images)
                 {
                     var imagePath = Path.Combine(imagesDirectoryPath, $"{image.Id}{image.Extension}");
-                    var imageData = ProjectViewer.GetImage(
+                    var imageData = _projectsRepository.GetImage(
                                         projectId: id,
-                                        imageId: image.Id,
-                                        connectionString);
+                                        imageId: image.Id);
                     File.WriteAllBytes(imagePath, imageData);
                     var imageTimeStampPath = Path.Combine(imagesDirectoryPath, $"{image.Id}.tmstmp");
                     File.WriteAllText(imageTimeStampPath, image.TimeStamp.ToString());
@@ -61,10 +62,10 @@ namespace MyPortfolioWebApp.Services.OperationsWithFiles
                     if (!File.Exists(imageTimeStampPath))
                     {
                         var imagePath = Path.Combine(imagesDirectoryPath, $"{image.Id}{image.Extension}");
-                        var imageData = ProjectViewer.GetImage(
+                        var imageData = _projectsRepository.GetImage(
                                             projectId: id,
-                                            imageId: image.Id,
-                                            connectionString);
+                                            imageId: image.Id);
+                                            
                         File.WriteAllBytes(imagePath, imageData);
                         File.WriteAllText(imageTimeStampPath, image.TimeStamp.ToString());
                     }
@@ -74,10 +75,10 @@ namespace MyPortfolioWebApp.Services.OperationsWithFiles
                         if (!currentImageTimeStamp.Equals(image.TimeStamp))
                         {
                             var imagePath = Path.Combine(imagesDirectoryPath, $"{image.Id}{image.Extension}");
-                            var imageData = ProjectViewer.GetImage(
+                            var imageData = _projectsRepository.GetImage(
                                                 projectId: id,
-                                                imageId: image.Id,
-                                                connectionString);
+                                                imageId: image.Id);
+                                               
                             File.WriteAllBytes(imagePath, imageData);
                             File.WriteAllText(imageTimeStampPath, image.TimeStamp.ToString());
                         }
