@@ -125,7 +125,11 @@ nav {
   margin-left:1rem;
 }
 .send-message-icon {
-  content:url(/icons/new-post-48-black.ico); 
+  background:url(/icons/new-post-48-black.ico); 
+  background-repeat:no-repeat;
+  background-size:contain;
+  width:3rem;
+  height:3rem;
   display: block;
   position: absolute;
   top: 50%;
@@ -134,10 +138,12 @@ nav {
   width: 3rem;
   transition: content 0.2s;  
 }
-.send-message-icon:hover { 
-  content:url(/icons/new-post-48-selected.ico);
-  cursor: pointer;
-}
+    .send-message-icon:hover {
+        background: url(/icons/new-post-48-selected.ico);
+        background-repeat: no-repeat;
+        background-size: contain;
+        cursor: pointer;
+    }
 .background {
     background-image: url(/images/background_lamp_2.jpg);
     background-size: cover;
