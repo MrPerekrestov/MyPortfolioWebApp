@@ -10,8 +10,7 @@ function FadeInAnimation(time) {
         complete: function () {
             if (ajaxFinished) return;
             let progressImage = document.getElementById("progress-image");
-            progressImage.style.display = "block";
-            console.log("set to block");
+            progressImage.style.display = "block";           
         }
     });
     return new Promise(resolve => setTimeout(resolve, time));
