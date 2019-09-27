@@ -1,8 +1,7 @@
 :root {
   --navbar-animation-time: 0.2s;
   --navbar-item-text-color-hover: #fc913a;
-  --navbar-item-text-color: black;
-  /*   --nav-and-footer-background-color: #fffef1; */
+  --navbar-item-text-color: black; 
   --nav-and-footer-background-color: rgba(252, 252, 231, 1);
   font-size: 85%;
 }
@@ -20,11 +19,7 @@ body {
     display: -ms-flexbox;
     display: none;
     flex-direction: column;
-    -webkit-overflow-scrolling: touch;
-    /*background-image: url(/images/background_lamp_2.jpg);
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;*/
+    -webkit-overflow-scrolling: touch;   
     overflow-y:scroll;
     margin: 0;
     padding: 0;
@@ -124,26 +119,28 @@ nav {
   width: 3rem;
   margin-left:1rem;
 }
-.send-message-icon {
-  background:url(/icons/new-post-48-black.ico); 
-  background-repeat:no-repeat;
-  background-size:contain;
-  width:3rem;
-  height:3rem;
-  display: block;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 3rem;
-  transition: content 0.2s;  
+.send-message-icon {    
+    background: url(/icons/new-post-48-black.ico);
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 3rem;
+    height: 3rem;
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 3rem;
+    transition: content 0.2s;
 }
-    .send-message-icon:hover {
-        background: url(/icons/new-post-48-selected.ico);
-        background-repeat: no-repeat;
-        background-size: contain;
-        cursor: pointer;
-    }
+
+
+.send-message-icon:hover {
+    background: url(/icons/new-post-48-selected.ico);
+    background-repeat: no-repeat;
+    background-size: contain;
+    cursor: pointer;
+}
 .background {
     background-image: url(/images/background_lamp_2.jpg);
     background-size: cover;
@@ -210,8 +207,7 @@ nav {
 #pop-up-message {
   font-size: 1.2rem;
   margin: 0 auto;
-  width: 30rem; 
-  /*max-width:90%;*/
+  width: 30rem;  
   text-align: center;
 }
 
