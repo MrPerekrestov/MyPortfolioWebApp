@@ -2,7 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.Facebook;
+using Microsoft.AspNetCore.Authentication.OAuth;
 using System.Threading.Tasks;
+using JavaScriptEngineSwitcher.ChakraCore;
+using JavaScriptEngineSwitcher.Extensions.MsDependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -15,21 +20,33 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
+using MyPortfolioWebApp.DbContexts.BlogDbContext;
 using MyPortfolioWebApp.DbContexts.PortfolioDbContext;
+using MyPortfolioWebApp.Services.BlogPostsRepository;
 using MyPortfolioWebApp.Services.OperationsWithFiles;
+using MyPortfolioWebApp.Services.OperationsWithFiles.BlogLogoResolverHelpers;
 using MyPortfolioWebApp.Services.ProjectsCleaner;
 using MyPortfolioWebApp.Services.ProjectsRepository;
 using NUglify.JavaScript;
+using React.AspNet;
+using MyPortfolioWebApp.Services.CommentServices;
+using Microsoft.AspNetCore.Authentication;
+using System.Security.Claims;
+using Google.Protobuf.WellKnownTypes;
+using MyPortfolioWebApp.Services.OperationsWithFiles.BlogImagesResolverHelpers;
+using MyPortfolioWebApp.Extensions;
 
 namespace MyPortfolioWebApp
 {
     public class Startup
     {
         private readonly IConfiguration _configuration;
+        private readonly IWebHostEnvironment _environment;
 
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IWebHostEnvironment environment)
         {
             _configuration = configuration;
+            _environment = environment;
         }
         public void ConfigureServices(IServiceCollection services)
         {
@@ -38,47 +55,40 @@ namespace MyPortfolioWebApp
                 var connectionString = _configuration.GetConnectionString("portfolio");
                 options.UseMySQL(connectionString); 
             });
-            services.AddTransient<IProjectsRepository, ProjectsRepositoryEF>();   
 
-            //  add wwwroot/Projects cleaner which delete unused folders
-            services.AddHostedService(serviceProvider => {
-                using var scope = serviceProvider.CreateScope();
-                var env = scope.ServiceProvider.GetService<IWebHostEnvironment>();
-                var config = scope.ServiceProvider.GetService<IConfiguration>();
-                var logger = scope.ServiceProvider.GetService<ILogger<ProjectsCleanerService>>();
-
-                var portfolioDbContextOptions = new DbContextOptionsBuilder<PortfolioContext>()
-                        .UseMySQL(config.GetConnectionString("portfolio"))
-                        .Options;
-                var portfolioContext = new PortfolioContext(portfolioDbContextOptions);
-                var repositoryType =scope.ServiceProvider.GetService<IProjectsRepository>().GetType();
-                var repo = Activator.CreateInstance(repositoryType, portfolioContext) as IProjectsRepository;                      
-                
-                return new ProjectsCleanerService(env, config, repo, logger);
-            });
-
-            services.AddTransient<IProjectFilesResolver, ProjectFilesResolver>();
-            services.AddSwaggerGen(c =>
+            services.AddDbContextPool<BlogContext>(options =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
-            });     
-            
-            services.AddWebOptimizer(pipeline=> {                
-                pipeline.AddCssBundle("/css/portfolio.min.css", "css/*.css");                
-                pipeline.AddJavaScriptBundle(
-                        "/js/portfolio.min.js",
-                        "js/ProjectsLinkClickBabel.js",
-                        "js/SendMail.js",
-                        "js/Layout.js",
-                        "js/About.js",
-                        "js/Projects.js"
-                        );    
+                var connectionString = _configuration.GetConnectionString("blog");
+                options.UseMySQL(connectionString);
             });
 
-            services.AddMvc(options =>
-            {                
-                options.EnableEndpointRouting = false;                
-            }).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+            services.AddTransient<IProjectsRepository, ProjectsRepositoryEF>();
+            services.AddTransient<IBlogPostsRepository, BlogPostsRepositoryEF>();
+            services.AddTransient<IBlogLogoResolverHelper, BlogLogoResolverHelper>();
+            services.AddTransient<IBlogLogoResolver, BlogLogoResolver>();
+            services.AddTransient<IProjectFilesResolver, ProjectFilesResolver>();
+            services.AddTransient<IProjectFilesResolver, ProjectFilesResolver>();
+            services.AddTransient<IBlogImageResolverHelper, BlogImageResolverHelper>();
+            services.AddTransient<IBlogImageResolver, BlogImageResolver>();
+            services.AddTransient<CommentManager>();
+
+            services.AddProjectsCleaner();            
+            services.AddBlogPostsCleaner();
+            services.AddLogosCleaner();
+
+            if (_environment.IsDevelopment())
+            {
+                services.AddSwaggerGen(c =>
+                {
+                    c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+                });
+            }          
+
+            services.ConfigureWebOptimizer();
+            services.ConfigureReact();          
+            services.ConfigureAuthentication(_configuration);
+
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
         }
      
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -86,19 +96,30 @@ namespace MyPortfolioWebApp
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("../swagger/v1/swagger.json", "My API V1");
+                });
             }
+           
             app.UseWebOptimizer();
             app.UseStaticFiles();
+            app.UseAuthentication();
+            app.UseAuthorization();
             app.UseStatusCodePagesWithReExecute("/Home/Error");
-            app.UseSwagger();            
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+           
+            app.UseReact(conf => {               
+                conf.AddScriptWithoutTransform("/components/*.js");                            
+                conf.SetAllowJavaScriptPrecompilation(true);
+                conf.SetLoadBabel(true);
             });
-            app.UseMvc(configureRouters =>
+
+            app.UseRouting();
+            app.UseEndpoints(configure =>
             {
-                configureRouters.MapRoute("default", "{controller=Home}/{action=About}");
-            });
-        }
+                configure.MapControllerRoute("default", "{controller=Home}/{action=About}");
+            });          
+        }        
     }
 }

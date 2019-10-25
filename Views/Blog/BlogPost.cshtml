@@ -1,0 +1,32 @@
+﻿@using MyPortfolioWebApp.Extensions;
+@using React.AspNet;
+@using MyPortfolioWebApp.Models.Blog;
+
+@model BlogPostModel;
+@{
+    ViewBag.Title = "Perekrestov's corner";
+    var data = new
+    {
+        returnUri = Model.ReturnUri,
+        authorized= Model.Authorized,
+        currentUserId= Model.CurrentUserId,
+        currentUserName= Model.CurrentUserName,
+        commentsData = Model.CommentsData,
+        postId = Model.PostId
+    };
+}
+@if (!Context.Request.IsAjaxRequest())
+{
+    Layout = "~/Views/_Layout.cshtml";
+}
+
+@Html.Raw(Model.BlogPostHtml)
+<div class="blog-comments-container" id="blog-comments-container">
+    @Html.React("Comments", data, containerId: "blog-comments")
+</div>
+
+<div id="react-script-container">
+    @Html.ReactInitJavaScript()
+</div>
+
+

@@ -1,4 +1,4 @@
-﻿using MyPortfolioWebApp.DatabaseManager.DatabaseService.ProjectViewerReturnTypes;
+﻿using MyPortfolioWebApp.Services.ProjectsRepository.ProjectsRepositoryReturnTypes;
 using System;
 using System.Collections.Generic;
 using System.Linq;

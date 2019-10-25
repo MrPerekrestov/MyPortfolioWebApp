@@ -1,1 +1,2 @@
 Scaffold-DbContext "persistsecurityinfo=False;server=localhost;user id=root; password=123321q1; port=3306; database=portfolio" MySql.Data.EntityFrameworkCore -o DbContexts/PortfolioDbContext -f
+Scaffold-DbContext "persistsecurityinfo=False;server=134.209.240.222;user id=root; password=123321q1; port=3306; database=blog" MySql.Data.EntityFrameworkCore -o DbContexts/BlogDbContext -f

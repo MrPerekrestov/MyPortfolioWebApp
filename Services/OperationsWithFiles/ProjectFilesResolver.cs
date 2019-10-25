@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
-using MyPortfolioWebApp.DatabaseManager.DatabaseService;
-using MyPortfolioWebApp.DatabaseManager.DatabaseService.ProjectViewerReturnTypes;
+using MyPortfolioWebApp.Services.ProjectsRepository.ProjectsRepositoryReturnTypes;
 using MyPortfolioWebApp.Services.ProjectsRepository;
 using System;
 using System.Collections.Generic;

@@ -20,17 +20,13 @@
         .getElementById("about-button")
         .addEventListener("click", async function () {
             ajaxFinished = false;
+            clearBlogDOM();
             let result = await Promise.all([GetAboutHtml(), FadeInAnimation(animationDuration)]);
             let progressImage = document.getElementById("progress-image");
             progressImage.style.display = "none";            
             contentContainer.innerHTML = result[0];
             window.scrollTo(0, 0);            
-            anime({
-                targets: ".content-container",
-                opacity: [0, 1],              
-                duration: animationDuration,
-                easing: "easeInOutQuad"
-            });           
+            FadeOutAnimation(animationDuration);         
             history.pushState("", document.title, window.location.origin
                 + "/about");
         });

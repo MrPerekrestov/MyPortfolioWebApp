@@ -1,0 +1,26 @@
+﻿.blog-comment-body-enter {
+    opacity: 0.01;    
+}
+
+    .blog-comment-body-enter.blog-comment-body-enter-active {
+        opacity: 1;      
+        transition: opacity 500ms ease-in;
+    }
+
+.blog-comment-body-appear {
+    opacity: 0.01;    
+}
+
+    .blog-comment-body-appear.blog-comment-body-appear-active {
+        opacity: 1;       
+        transition: opacity 500ms ease-in;
+    }
+
+.blog-comment-body-exit {
+    opacity: 1; 
+}
+
+    .blog-comment-body-exit.blog-comment-body-exit-active {
+        opacity: 0.01;    
+        transition: opacity 300ms ease-in;
+    }

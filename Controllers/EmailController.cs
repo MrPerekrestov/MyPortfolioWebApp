@@ -36,7 +36,7 @@ namespace MyPortfolioWebApp.Controllers
         [HttpPost]
         [Route("Send")]
         public IActionResult Send([FromBody] EmailSendModel model)
-        {
+        {            
             try
             {
                 if (!ModelState.IsValid)
@@ -83,7 +83,7 @@ namespace MyPortfolioWebApp.Controllers
                 return StatusCode(
                     StatusCodes.Status500InternalServerError,
                     new {success = false, message = exception.Message });
-            }           
+            }            
         }
         
     }

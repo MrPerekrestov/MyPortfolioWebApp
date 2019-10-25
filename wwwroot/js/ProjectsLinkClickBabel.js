@@ -33,12 +33,7 @@ window.addEventListener("load", function () {
                 progressImage.style.display = "none";
                 window.scrollTo(0, 0);
                 contentContainer.innerHTML = result[0];
-                anime({
-                    targets: ".content-container",
-                    opacity: [0, 1],
-                    duration: animationDuration,
-                    easing: "easeInOutQuad"
-                });
+                FadeOutAnimation(animationDuration);  
                 history.pushState("", document.title, window.location.origin + "/projects/" + linkButton.getAttribute("project-id"));
             });
         };

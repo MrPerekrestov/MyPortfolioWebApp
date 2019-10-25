@@ -10,6 +10,7 @@ using MyPortfolioWebApp.DatabaseManager.DatabaseService;
 using Google.Protobuf.WellKnownTypes;
 using MyPortfolioWebApp.Services.OperationsWithFiles;
 using MyPortfolioWebApp.Extensions;
+using MyPortfolioWebApp.Services.ProjectsRepository.ProjectsRepositoryReturnTypes;
 using MyPortfolioWebApp.Services.ProjectsRepository;
 
 namespace MyPortfolioWebApp.Controllers

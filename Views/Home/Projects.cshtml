@@ -1,4 +1,4 @@
-﻿@using MyPortfolioWebApp.DatabaseManager.DatabaseService.ProjectViewerReturnTypes;
+﻿@using MyPortfolioWebApp.Services.ProjectsRepository.ProjectsRepositoryReturnTypes;
 @using MyPortfolioWebApp.Extensions;
 @if (!Context.Request.IsAjaxRequest())
 {
@@ -21,7 +21,7 @@
         }
         <div class="project-item-container">
             <div class="project-item-header">
-                    <h2>@projectInfo.Name</h2> 
+                <h2>@projectInfo.Name</h2>
                 <div class="project-item-published">
                     released: @projectInfo.Created.ToString("MM/yyyy")
                 </div>

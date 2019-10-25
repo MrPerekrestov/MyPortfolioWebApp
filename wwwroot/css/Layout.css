@@ -8,10 +8,11 @@
 
 html,
 body {
-  height: 100%;   
+    height: 100%;    
 }
-html {   
-    font-size: 16px;    
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
 }
 body {
     display: -webkit-box;
@@ -151,10 +152,12 @@ nav {
     -webkit-background-size: cover;
     -ms-content-zooming: none;
     position: fixed;
-    z-index:-1;
+    z-index: -1;
     width: 100%;
-    height: 100vh;     
+    height: 100vh;
     font-family: 'Scout', arial, sans-serif;
+    -webkit-filter: blur(2px);
+    filter: blur(2px);
 }
 .content-container {  
     flex: 1 0 auto;
@@ -169,7 +172,7 @@ nav {
         left: 0;
         width: 100%;
         height: 100%;
-        background: rgba(220, 220, 220, 0.3);
+        background: rgba(220, 220, 220, 0.3);        
         z-index: -1;
     }
 #progress-image {

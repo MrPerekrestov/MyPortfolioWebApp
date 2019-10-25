@@ -20,6 +20,7 @@ namespace MyPortfolioWebApp.Services.ProjectsCleaner
         private readonly IConfiguration _configuration;
         private readonly ILogger<ProjectsCleanerService> _logger;
         private readonly IProjectsRepository _projectsRepository;
+        private bool disposed = false;
 
         public ProjectsCleanerService(
             IWebHostEnvironment env,
@@ -72,9 +73,28 @@ namespace MyPortfolioWebApp.Services.ProjectsCleaner
             _timer?.Change(Timeout.Infinite, 0);
             return Task.CompletedTask;
         }
+      
         public void Dispose()
         {
-            _timer?.Dispose();
+            Dispose(true);
+            GC.SuppressFinalize(this);            
+        }
+      
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                _timer?.Dispose();                
+            }
+
+            disposed = true;
+        }
+        ~ProjectsCleanerService()
+        {
+            Dispose(false);
         }
     }
 }

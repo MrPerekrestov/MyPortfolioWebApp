@@ -4,9 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="icon" type="" href="~/icons/icons8-source-code-32.png">    
+    <link rel="icon" type="" href="~/icons/icons8-source-code-32.png">
     <link rel="stylesheet" href="~/css/portfolio.min.css" />
     <script src="~/js/anime.min.js"></script>
+    <script src="~/js/highlight.min.js"></script>
+    <script src="~/js/portfolio.min.js"></script>
     <title>@ViewBag.Title</title>
 </head>
 <body>
@@ -15,8 +17,9 @@
         <div class="nav-bar-container-outer">
             <div class="nav-bar-container-inner">
                 <div></div>
-                <a id="projects-button" class="nav-bar-item">My projects</a>
-                <a id="about-button" class="nav-bar-item">About me</a>
+                <a id="projects-button" class="nav-bar-item">Projects</a>
+                <a id="blog-button" class="nav-bar-item">Blog</a>
+                <a id="about-button" class="nav-bar-item">About</a>                
                 <div class="send-message-container">
                     <div id="send-email-image"                         
                          class="send-message-icon"                   
@@ -91,6 +94,6 @@
         </div>
     </div>    
     <div class="shade" id="shade"></div>
-    <script src="~/js/portfolio.min.js"></script>
+  
 </body>
 </html>

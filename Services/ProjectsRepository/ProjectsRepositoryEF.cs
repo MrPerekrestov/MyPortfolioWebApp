@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
-using MyPortfolioWebApp.DatabaseManager.DatabaseService.ProjectViewerReturnTypes;
 using MyPortfolioWebApp.DbContexts.PortfolioDbContext;
+using MyPortfolioWebApp.Services.ProjectsRepository.ProjectsRepositoryReturnTypes;
 
 namespace MyPortfolioWebApp.Services.ProjectsRepository
 {

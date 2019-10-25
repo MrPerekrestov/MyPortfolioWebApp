@@ -1,0 +1,17 @@
+﻿@using MyPortfolioWebApp.Extensions;
+@using MyPortfolioWebApp.Models.Blog;
+@using System.Text.Json;
+@using React.AspNet;
+@using React.Router;
+@model BlogModel;
+@{
+    ViewBag.Title = "Perekrestov's corner";
+}
+@if (!Context.Request.IsAjaxRequest())
+{
+    Layout = "~/Views/_Layout.cshtml";
+}
+@Html.React("Blog", Model, containerId: "my-blog")
+<div id="react-script-container">
+    @Html.ReactInitJavaScript()
+</div>
