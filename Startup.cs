@@ -35,6 +35,7 @@ using System.Security.Claims;
 using Google.Protobuf.WellKnownTypes;
 using MyPortfolioWebApp.Services.OperationsWithFiles.BlogImagesResolverHelpers;
 using MyPortfolioWebApp.Extensions;
+using Microsoft.AspNetCore.HttpOverrides;
 
 namespace MyPortfolioWebApp
 {
@@ -105,6 +106,11 @@ namespace MyPortfolioWebApp
            
             app.UseWebOptimizer();
             app.UseStaticFiles();
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+            });
+            app.UseHttpMethodOverride();
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseStatusCodePagesWithReExecute("/Home/Error");
