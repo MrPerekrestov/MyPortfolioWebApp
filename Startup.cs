@@ -36,6 +36,7 @@ using Google.Protobuf.WellKnownTypes;
 using MyPortfolioWebApp.Services.OperationsWithFiles.BlogImagesResolverHelpers;
 using MyPortfolioWebApp.Extensions;
 using Microsoft.AspNetCore.HttpOverrides;
+using System.Net;
 
 namespace MyPortfolioWebApp
 {
@@ -83,7 +84,12 @@ namespace MyPortfolioWebApp
                 {
                     c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
                 });
-            }          
+            }
+
+            services.Configure<ForwardedHeadersOptions>(options =>
+            {
+                options.KnownProxies.Add(IPAddress.Any);
+            });
 
             services.ConfigureWebOptimizer();
             services.ConfigureReact();          
@@ -103,14 +109,25 @@ namespace MyPortfolioWebApp
                     c.SwaggerEndpoint("../swagger/v1/swagger.json", "My API V1");
                 });
             }
+
            
             app.UseWebOptimizer();
             app.UseStaticFiles();
             app.UseForwardedHeaders(new ForwardedHeadersOptions
             {
                 ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
-            });
+            });           
             app.UseHttpMethodOverride();
+
+            app.Use((context, next) =>
+            {
+                if (context.Request.Headers["x-forwarded-proto"] == "https")
+                {
+                    context.Request.Scheme = "https";
+                }
+                return next();
+            });
+
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseStatusCodePagesWithReExecute("/Home/Error");
