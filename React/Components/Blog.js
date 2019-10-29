@@ -12,8 +12,7 @@ class Blog extends Component {
         this.changeFilterText = this.changeFilterText.bind(this);
     }
 
-    changeFilterText(filterText) {
-        console.log(filterText)
+    changeFilterText(filterText) {       
         this.setState((prevState, props) => {
             return {
                 filterText: filterText

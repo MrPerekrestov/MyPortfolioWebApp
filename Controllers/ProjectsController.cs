@@ -1,16 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using MyPortfolioWebApp.DatabaseManager.DatabaseService;
-using Google.Protobuf.WellKnownTypes;
 using MyPortfolioWebApp.Services.OperationsWithFiles;
 using MyPortfolioWebApp.Extensions;
-using MyPortfolioWebApp.Services.ProjectsRepository.ProjectsRepositoryReturnTypes;
 using MyPortfolioWebApp.Services.ProjectsRepository;
 
 namespace MyPortfolioWebApp.Controllers

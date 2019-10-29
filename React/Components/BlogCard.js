@@ -28,10 +28,8 @@ class BlogCard extends Component {
                 contentContainer.innerHTML = result;     
                 let reactHydrateScript = document.querySelector("#react-script-container script").innerHTML;
                 eval(reactHydrateScript);
-                let additionalScripts = document.getElementById("blog-post-script-on-load");
-                console.log(additionalScripts);
-                if (additionalScripts) {
-                    console.log(additionalScripts.innerHTML);
+                let additionalScripts = document.getElementById("blog-post-script-on-load");              
+                if (additionalScripts) {                   
                     eval(additionalScripts.innerHTML);
                 } 
                 FadeOutAnimation(animationDuration);  

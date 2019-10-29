@@ -1,10 +1,8 @@
 ﻿using MyPortfolioWebApp.DbContexts.BlogDbContext;
 using MyPortfolioWebApp.Services.BlogPostsRepository.BlogRepositoryReturnTypes;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace MyPortfolioWebApp.Services.BlogPostsRepository
 {
@@ -26,7 +24,8 @@ namespace MyPortfolioWebApp.Services.BlogPostsRepository
 
         public IEnumerable<BlogPostInfo> GetBlogPosts() =>
             _dbContext
-            .Posts            
+            .Posts
+            .AsQueryable()
             .OrderByDescending(post => post.Published)
             .Select(post => new BlogPostInfo
             {
@@ -40,6 +39,7 @@ namespace MyPortfolioWebApp.Services.BlogPostsRepository
         public IEnumerable<BlogImageInfo> GetBlogImages(int postId) =>
             _dbContext
             .Images
+            .AsQueryable()
             .Where(image => image.BlogPostId == postId)
             .Select(image => new BlogImageInfo
             {
@@ -50,11 +50,15 @@ namespace MyPortfolioWebApp.Services.BlogPostsRepository
         public bool ImageExists(int postId, int imageId) =>
             _dbContext
             .Images
+            .AsQueryable()
             .Where(image => image.ImageId == imageId && image.BlogPostId == postId)
             .FirstOrDefault() != null;
 
         public IEnumerable<LogoInfo> GetLogosInfo() =>
-            _dbContext.Logos.Select(logo => new LogoInfo
+            _dbContext
+            .Logos
+            .AsQueryable()
+            .Select(logo => new LogoInfo
             {
                 Id = logo.Id,
                 Extension= logo.Extension,
@@ -62,7 +66,10 @@ namespace MyPortfolioWebApp.Services.BlogPostsRepository
             });
 
         public LogoInfo GetLogoInfo(int id) =>
-            _dbContext.Logos.Where(logo => logo.Id == id)
+            _dbContext
+            .Logos
+            .AsQueryable()
+            .Where(logo => logo.Id == id)
             .Select(logo=>new LogoInfo
             {
                 Id = logo.Id,
@@ -73,7 +80,8 @@ namespace MyPortfolioWebApp.Services.BlogPostsRepository
 
         public byte[] GetLogoBytes(int id) => 
             _dbContext
-            .Logos 
+            .Logos
+            .AsQueryable()
             .Where(logo => logo.Id == id)
             .Select(logo => logo.LogoBytes)
             .FirstOrDefault();
@@ -81,6 +89,7 @@ namespace MyPortfolioWebApp.Services.BlogPostsRepository
         public string GetBlogPostHtml(int id) =>
             _dbContext
             .Posts
+            .AsQueryable()
             .Where(post => post.Id == id)
             .Select(post => post.Html)
             .FirstOrDefault();
@@ -88,6 +97,7 @@ namespace MyPortfolioWebApp.Services.BlogPostsRepository
         public IEnumerable<BlogCommentInfo> GetComments(int postId) =>
             _dbContext
             .Comments
+            .AsQueryable()
             .Where(commment => commment.PostId == postId)
             .Select(comment=>new BlogCommentInfo
                 {
@@ -103,6 +113,7 @@ namespace MyPortfolioWebApp.Services.BlogPostsRepository
         public IEnumerable<BlogImageInfo> GetImagesInfo(int postId) =>
             _dbContext
             .Images
+            .AsQueryable()
             .Where(image => image.BlogPostId == postId)
             .Select(image => new BlogImageInfo
             {
@@ -113,12 +124,14 @@ namespace MyPortfolioWebApp.Services.BlogPostsRepository
         public byte[] GetImage(int postId, int imageId) =>
             _dbContext
             .Images
+            .AsQueryable()
             .Where(image => image.BlogPostId == postId && image.ImageId == imageId)
             .Select(image => image.ImageBlob)
             .FirstOrDefault();
         public DateTime GetBlogPostImagesChangedDate(int postId) =>
             _dbContext
             .Posts
+            .AsQueryable()
             .Where(post => post.Id == postId)
             .Select(post => post.ImagesChanged)
             .FirstOrDefault();

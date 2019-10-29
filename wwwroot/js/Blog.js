@@ -1,6 +1,6 @@
 ﻿window.addEventListener("load", () => {
     let contentContainer = document.querySelector(".content-container");
-    async function GetAboutHtml() {
+    async function GetBlogHtml() {
         return new Promise(resolve => {
             let getAboutXhr = new XMLHttpRequest();
             getAboutXhr.open("GET", "/blog", true);
@@ -19,11 +19,11 @@
     document
         .getElementById("blog-button")
         .addEventListener("click", async function () {           
-            ajaxFinished = false;
-            clearBlogDOM();
-            let result = await Promise.all([GetAboutHtml(), FadeInAnimation(animationDuration)]);
+            ajaxFinished = false;            
+            let result = await Promise.all([GetBlogHtml(), FadeInAnimation(animationDuration)]);           
             let progressImage = document.getElementById("progress-image");
             progressImage.style.display = "none";
+            clearBlogDOM();
             contentContainer.innerHTML = result[0];
             let reactHydrateScript = document.querySelector("#react-script-container script").innerHTML;
             eval(reactHydrateScript);                        

@@ -19,12 +19,12 @@
     document
         .getElementById("projects-button")
         .addEventListener("click", async function () {
-            ajaxFinished = false; 
-            clearBlogDOM();
+            ajaxFinished = false;            
             let result = await Promise.all([GetAboutHtml(), FadeInAnimation(animationDuration)]);
             let progressImage = document.getElementById("progress-image");
             progressImage.style.display = "none"; 
             window.scrollTo(0, 0);
+            clearBlogDOM();
             contentContainer.innerHTML = result[0];
             FadeOutAnimation(animationDuration);  
             history.pushState("", document.title, window.location.origin
@@ -40,12 +40,7 @@
                     progressImage.style.display = "none";
                     window.scrollTo(0, 0);
                     contentContainer.innerHTML = result[0];                   
-                    anime({
-                        targets: ".content-container",
-                        opacity: [0, 1],               
-                        duration: animationDuration,
-                        easing: "easeInOutQuad"
-                    });
+                    FadeOutAnimation(animationDuration);
                     history.pushState("", document.title, window.location.origin
                         + "/projects/" + linkButton.getAttribute("project-id"));
                 });

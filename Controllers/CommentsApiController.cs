@@ -12,10 +12,10 @@ namespace MyPortfolioWebApp.Controllers
     [Route("api/[controller]")]
     public class CommentsApiController : Controller
     {
-        private readonly CommentManager _commentManager;
+        private readonly ICommentManager _commentManager;
         private readonly IWebHostEnvironment _env;
 
-        public CommentsApiController(CommentManager commentManager, IWebHostEnvironment env)
+        public CommentsApiController(ICommentManager commentManager, IWebHostEnvironment env)
         {
             _commentManager = commentManager;
             _env = env;

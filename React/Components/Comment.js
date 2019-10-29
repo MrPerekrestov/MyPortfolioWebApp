@@ -70,8 +70,7 @@ class Comment extends Component {
             return {
                 deletingStarted: true
             }
-        });
-        console.log(`/api/CommentsApi/Deletecomment/${this.props.commentId}`);
+        });        
         fetch(`/api/CommentsApi/Deletecomment/${this.props.commentId}`, {
             method: "POST",
             headers: {

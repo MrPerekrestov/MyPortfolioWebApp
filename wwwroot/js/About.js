@@ -19,11 +19,11 @@
     document
         .getElementById("about-button")
         .addEventListener("click", async function () {
-            ajaxFinished = false;
-            clearBlogDOM();
+            ajaxFinished = false;            
             let result = await Promise.all([GetAboutHtml(), FadeInAnimation(animationDuration)]);
             let progressImage = document.getElementById("progress-image");
-            progressImage.style.display = "none";            
+            progressImage.style.display = "none";       
+            clearBlogDOM();
             contentContainer.innerHTML = result[0];
             window.scrollTo(0, 0);            
             FadeOutAnimation(animationDuration);         

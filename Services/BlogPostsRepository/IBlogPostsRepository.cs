@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using MyPortfolioWebApp.DbContexts.BlogDbContext;
 using MyPortfolioWebApp.Services.BlogPostsRepository.BlogRepositoryReturnTypes;
 
 namespace MyPortfolioWebApp.Services.BlogPostsRepository

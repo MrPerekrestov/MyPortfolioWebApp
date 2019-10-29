@@ -2,10 +2,6 @@
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using MyPortfolioWebApp.Services.OperationsWithFiles.BlogImagesResolverHelpers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace MyPortfolioWebApp.Services.OperationsWithFiles
 {

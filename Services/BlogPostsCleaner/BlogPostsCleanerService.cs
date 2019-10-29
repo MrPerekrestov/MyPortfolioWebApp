@@ -2,11 +2,9 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using MyPortfolioWebApp.DbContexts.BlogDbContext;
 using MyPortfolioWebApp.Services.BlogPostsRepository;
 using NUglify.Helpers;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading;

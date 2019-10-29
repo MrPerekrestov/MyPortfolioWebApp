@@ -1,8 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Storage;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Diagnostics.CodeAnalysis;
-using System.Text;
 
 namespace MyPortfolioWebApp.Services.BlogPostsRepository.BlogRepositoryReturnTypes
 {

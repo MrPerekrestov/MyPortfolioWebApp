@@ -1,12 +1,10 @@
 ﻿using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using MyPortfolioWebApp.Services.ProjectsRepository.ProjectsRepositoryReturnTypes;
 using MyPortfolioWebApp.Services.ProjectsRepository;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace MyPortfolioWebApp.Services.OperationsWithFiles
 {

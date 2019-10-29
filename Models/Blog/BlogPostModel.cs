@@ -1,5 +1,4 @@
-﻿using MyPortfolioWebApp.DbContexts.BlogDbContext;
-using MyPortfolioWebApp.Services.BlogPostsRepository.BlogRepositoryReturnTypes;
+﻿using MyPortfolioWebApp.Services.BlogPostsRepository.BlogRepositoryReturnTypes;
 using System.Collections.Generic;
 
 namespace MyPortfolioWebApp.Models.Blog

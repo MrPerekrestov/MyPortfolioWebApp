@@ -1,17 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using MailKit;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using MyPortfolioWebApp.Attributes;
-using MyPortfolioWebApp.DatabaseManager.DatabaseService;
-using MyPortfolioWebApp.Extensions;
 using MyPortfolioWebApp.Models.Blog;
 using MyPortfolioWebApp.Services.BlogPostsRepository;
 using MyPortfolioWebApp.Services.OperationsWithFiles;

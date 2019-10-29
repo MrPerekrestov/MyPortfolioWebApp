@@ -1,42 +1,24 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication.Facebook;
-using Microsoft.AspNetCore.Authentication.OAuth;
-using System.Threading.Tasks;
-using JavaScriptEngineSwitcher.ChakraCore;
-using JavaScriptEngineSwitcher.Extensions.MsDependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using MyPortfolioWebApp.DbContexts.BlogDbContext;
 using MyPortfolioWebApp.DbContexts.PortfolioDbContext;
 using MyPortfolioWebApp.Services.BlogPostsRepository;
 using MyPortfolioWebApp.Services.OperationsWithFiles;
 using MyPortfolioWebApp.Services.OperationsWithFiles.BlogLogoResolverHelpers;
-using MyPortfolioWebApp.Services.ProjectsCleaner;
 using MyPortfolioWebApp.Services.ProjectsRepository;
-using NUglify.JavaScript;
 using React.AspNet;
 using MyPortfolioWebApp.Services.CommentServices;
-using Microsoft.AspNetCore.Authentication;
-using System.Security.Claims;
-using Google.Protobuf.WellKnownTypes;
 using MyPortfolioWebApp.Services.OperationsWithFiles.BlogImagesResolverHelpers;
 using MyPortfolioWebApp.Extensions;
 using Microsoft.AspNetCore.HttpOverrides;
 using System.Net;
+using Microsoft.AspNetCore.Http;
 
 namespace MyPortfolioWebApp
 {
@@ -72,7 +54,7 @@ namespace MyPortfolioWebApp
             services.AddTransient<IProjectFilesResolver, ProjectFilesResolver>();
             services.AddTransient<IBlogImageResolverHelper, BlogImageResolverHelper>();
             services.AddTransient<IBlogImageResolver, BlogImageResolver>();
-            services.AddTransient<CommentManager>();
+            services.AddTransient<ICommentManager, CommentManager>();
 
             services.AddProjectsCleaner();            
             services.AddBlogPostsCleaner();
@@ -109,8 +91,11 @@ namespace MyPortfolioWebApp
                     c.SwaggerEndpoint("../swagger/v1/swagger.json", "My API V1");
                 });
             }
+            app.UseCookiePolicy(new CookiePolicyOptions
+            {
+                MinimumSameSitePolicy = SameSiteMode.None
+            });
 
-           
             app.UseWebOptimizer();
             app.UseStaticFiles();
             app.UseForwardedHeaders(new ForwardedHeadersOptions

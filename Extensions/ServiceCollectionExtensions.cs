@@ -52,7 +52,7 @@ namespace MyPortfolioWebApp.Extensions
                 options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = FacebookDefaults.AuthenticationScheme;                
             })
-                .AddCookie()
+                .AddCookie(options => options.Cookie.SameSite = SameSiteMode.None)
                 .AddFacebook(options =>
                 {
                    

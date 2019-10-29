@@ -1,13 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using MyPortfolioWebApp.DbContexts.BlogDbContext;
-using System;
-using System.Collections.Generic;
+﻿using MyPortfolioWebApp.DbContexts.BlogDbContext;
 using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace MyPortfolioWebApp.Services.CommentServices
 {
-    public class CommentManager
+    public class CommentManager : ICommentManager
     {
         private readonly BlogContext _dbContext;
 
@@ -27,27 +24,30 @@ namespace MyPortfolioWebApp.Services.CommentServices
             }
             return (false, "Comment was not added");
         }
-        public (bool success,string message) DeleteComment(int commentId)
+        public (bool success, string message) DeleteComment(int commentId)
         {
             var commentToRemove = _dbContext
                 .Comments
+                .AsQueryable()
                 .Where(comment => comment.CommentId == commentId)
                 .FirstOrDefault();
 
-            if (commentToRemove==null)
+            if (commentToRemove == null)
             {
                 return (false, "Comment does not exist");
             }
             _dbContext.Comments.Remove(commentToRemove);
-            if(_dbContext.SaveChanges()>0){
+            if (_dbContext.SaveChanges() > 0)
+            {
                 return (true, "Comment was successfully deleted");
             }
-            return (false, "Comment was not deleted");           
-        }        
+            return (false, "Comment was not deleted");
+        }
         public (bool success, string message) UpdateComment(int commentId, string commentText)
         {
             var comment = _dbContext
                 .Comments
+                .AsQueryable()
                 .Where(comment => comment.CommentId == commentId)
                 .FirstOrDefault();
             if (comment == null)
@@ -60,7 +60,7 @@ namespace MyPortfolioWebApp.Services.CommentServices
                 return (false, "Comment text is the same as previous");
             }
 
-            comment.CommentText = commentText;           
+            comment.CommentText = commentText;
             var updateResult = _dbContext.SaveChanges();
 
             if (updateResult > 0)
@@ -72,9 +72,10 @@ namespace MyPortfolioWebApp.Services.CommentServices
         public string GetCommentOwner(int commentId) =>
             _dbContext
             .Comments
+            .AsQueryable()
             .Where(comment => comment.CommentId == commentId)
             .Select(comment => comment.UserId)
             .FirstOrDefault();
-        
+
     }
 }

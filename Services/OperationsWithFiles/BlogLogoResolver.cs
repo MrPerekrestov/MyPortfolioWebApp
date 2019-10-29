@@ -1,15 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
-using MyPortfolioWebApp.DbContexts.BlogDbContext;
-using MyPortfolioWebApp.Services.BlogPostsRepository;
-using MyPortfolioWebApp.Services.BlogPostsRepository.BlogRepositoryReturnTypes;
-using MyPortfolioWebApp.Services.OperationsWithFiles.BlogLogoResolverHelpers;
-using NUglify.Helpers;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
+﻿using MyPortfolioWebApp.Services.OperationsWithFiles.BlogLogoResolverHelpers;
+
 
 namespace MyPortfolioWebApp.Services.OperationsWithFiles
 {
