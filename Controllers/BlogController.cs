@@ -51,11 +51,7 @@ namespace MyPortfolioWebApp.Controllers
 
             var currentUserName = HttpContext.User.Claims?
                 .FirstOrDefault(claim => claim.Type == ClaimTypes.GivenName)?
-                .Value ?? string.Empty;
-
-            //var authorized = true;
-            //var currentUserId = "1192472530950477";
-            //var currentUserName = "Roman";
+                .Value ?? string.Empty;          
 
             var commentData = _repository.GetComments(id).ToList();
             var model = new BlogPostModel
