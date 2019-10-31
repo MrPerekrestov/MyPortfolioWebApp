@@ -47,7 +47,7 @@ class BlogCard extends Component {
         return (
             <div onClick={this.click} className="blog-card">
                 <div className="blog-card-img-and-text">
-                    <img className="blog-card-img" src={imgSrc}></img>
+                    <img className="blog-card-img" src={imgSrc} alt="blog card image"></img>
                     <div className="blog-card-datum">{published}</div>
                     <div className="blog-card-text-outer">
                         <div className="blog-card-empty-space"></div>

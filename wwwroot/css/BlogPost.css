@@ -21,6 +21,8 @@
 
     .blog-post-container-outer ol {
         align-self: flex-start;
+        margin-top:0.5rem;
+        margin-bottom:0.5rem;
     }
 
     .blog-post-container-outer ul {
@@ -100,6 +102,8 @@
     .blog-post-text h3 {
         font-family: "Montserrat", sans-serif;
         align-self: flex-start;
+        margin-top:0.5rem;
+        margin-bottom:0.5rem;
         line-height: 2rem;
         text-indent: 2rem;
     }
