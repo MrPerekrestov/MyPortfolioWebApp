@@ -7,7 +7,7 @@
 
 emailservicesettings.json
 appsettings.json
-appsettings.Development
+appsettings.Development.json
 
 *.rsuser
 *.suo
