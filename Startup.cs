@@ -114,7 +114,7 @@ namespace MyPortfolioWebApp
             });
 
             app.UseAuthentication();
-            app.UseAuthorization();
+            
             app.UseStatusCodePagesWithReExecute("/Home/Error");
            
             app.UseReact(conf => {               
@@ -124,6 +124,7 @@ namespace MyPortfolioWebApp
             });
 
             app.UseRouting();
+            app.UseAuthorization();
             app.UseEndpoints(configure =>
             {
                 configure.MapControllerRoute("default", "{controller=Home}/{action=About}");
